@@ -25,15 +25,14 @@
       --green: #15803d;
       --green-bg: #f0fdf4;
       --green-border: #bbf7d0;
+      --amber: #b45309;
+      --amber-bg: #fffbeb;
+      --amber-border: #fde68a;
       --mono: "SF Mono", "Menlo", "Consolas", "Courier New", monospace;
       --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--sans);
@@ -44,10 +43,7 @@
       padding: 40px 16px 32px;
     }
 
-    .wrapper {
-      max-width: 680px;
-      margin: 0 auto;
-    }
+    .wrapper { max-width: 680px; margin: 0 auto; }
 
     .card {
       background: var(--surface);
@@ -57,12 +53,8 @@
     }
 
     @media (max-width: 560px) {
-      body {
-        padding: 20px 12px 24px;
-      }
-      .card {
-        padding: 22px 18px;
-      }
+      body { padding: 20px 12px 24px; }
+      .card { padding: 22px 18px; }
     }
 
     .status-tag {
@@ -88,17 +80,10 @@
       margin-bottom: 8px;
     }
 
-    .lead {
-      font-size: 13.5px;
-      color: var(--muted);
-      margin-bottom: 22px;
-    }
+    .lead { font-size: 13.5px; color: var(--muted); margin-bottom: 22px; }
+    .lead strong { color: var(--text); }
 
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border-light);
-      margin-bottom: 20px;
-    }
+    .divider { border: none; border-top: 1px solid var(--border-light); margin-bottom: 20px; }
 
     .section-kicker {
       font-family: var(--mono);
@@ -110,49 +95,16 @@
       margin-bottom: 10px;
     }
 
-    .diag-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 26px;
-      font-size: 13px;
-    }
-
-    .diag-table td {
-      padding: 9px 4px;
-      border-bottom: 1px solid var(--border-light);
-      vertical-align: top;
-    }
-
-    .diag-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .diag-table td.key {
-      width: 210px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .diag-table td.val {
-      font-family: var(--mono);
-      font-size: 12.5px;
-      color: var(--text);
-      word-break: break-all;
-    }
-
-    .diag-table td.val.url-highlight {
-      color: var(--red);
-      font-weight: 600;
-    }
+    .diag-table { width: 100%; border-collapse: collapse; margin-bottom: 26px; font-size: 13px; }
+    .diag-table td { padding: 9px 4px; border-bottom: 1px solid var(--border-light); vertical-align: top; }
+    .diag-table tr:last-child td { border-bottom: none; }
+    .diag-table td.key { width: 210px; color: var(--muted); font-weight: 500; }
+    .diag-table td.val { font-family: var(--mono); font-size: 12.5px; color: var(--text); word-break: break-word; }
+    .diag-table td.val.url-highlight { color: var(--red); font-weight: 600; }
 
     @media (max-width: 560px) {
-      .diag-table td.key {
-        width: 145px;
-        font-size: 12px;
-      }
-      .diag-table td.val {
-        font-size: 11.5px;
-      }
+      .diag-table td.key { width: 140px; font-size: 12px; }
+      .diag-table td.val { font-size: 11.5px; }
     }
 
     .ticket-box {
@@ -162,33 +114,13 @@
       padding: 20px 22px;
     }
 
-    .ticket-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
+    .ticket-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .ticket-desc { font-size: 12.5px; color: var(--muted); margin-bottom: 16px; }
 
-    .ticket-desc {
-      font-size: 12.5px;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
+    .field { margin-bottom: 12px; }
+    .field label { display: block; font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
 
-    .field {
-      margin-bottom: 12px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    input[type="text"],
-    textarea {
+    input[type="text"], textarea {
       width: 100%;
       padding: 8px 10px;
       border: 1px solid var(--border);
@@ -199,23 +131,12 @@
       color: var(--text);
     }
 
-    input.mono-input {
-      font-family: var(--mono);
-      font-size: 12.5px;
-    }
-
-    input:focus,
-    textarea:focus {
-      outline: none;
-      border-color: var(--navy);
-    }
-
-    input.input-invalid {
-      border-color: var(--red);
-      background-color: var(--red-bg);
-    }
+    input.mono-input { font-family: var(--mono); font-size: 12.5px; }
+    input:focus, textarea:focus { outline: none; border-color: var(--navy); }
+    input.input-invalid, textarea.input-invalid { border-color: var(--red); background-color: var(--red-bg); }
 
     .btn-submit {
+      display: inline-block;
       background: var(--navy);
       color: #ffffff;
       border: 1px solid var(--navy-dark);
@@ -225,16 +146,24 @@
       font-weight: 600;
       cursor: pointer;
       margin-top: 4px;
+      text-decoration: none;
     }
+    .btn-submit:hover { background: var(--navy-dark); }
+    .btn-submit:disabled { opacity: 0.65; cursor: not-allowed; }
 
-    .btn-submit:hover {
-      background: var(--navy-dark);
+    .btn-launch {
+      display: inline-block;
+      background: var(--green);
+      color: #ffffff;
+      border: 1px solid #166534;
+      border-radius: 2px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-right: 12px;
     }
-
-    .btn-submit:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-    }
+    .btn-launch:hover { background: #166534; }
 
     .security-lock {
       background: var(--red-bg);
@@ -246,13 +175,7 @@
       color: var(--red);
     }
 
-    .receipt-card {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 16px 18px;
-    }
-
+    .receipt-card { background: #ffffff; border: 1px solid var(--border); border-radius: 2px; padding: 16px 18px; }
     .receipt-top {
       display: flex;
       justify-content: space-between;
@@ -263,60 +186,27 @@
       border-bottom: 1px solid var(--border-light);
       margin-bottom: 12px;
     }
-
-    .receipt-heading {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--text);
-      text-transform: uppercase;
-    }
-
+    .receipt-heading { font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; color: var(--text); text-transform: uppercase; }
     .receipt-badge {
       font-family: var(--mono);
       font-size: 10.5px;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--green);
-      background: var(--green-bg);
-      border: 1px solid var(--green-border);
+      color: var(--amber);
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
       padding: 3px 8px;
       border-radius: 2px;
     }
+    .receipt-badge.approved { color: var(--green); background: var(--green-bg); border-color: var(--green-border); }
+    .receipt-badge.rejected { color: var(--red); background: var(--red-bg); border-color: var(--red-border); }
 
-    .receipt-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px 16px;
-      margin-bottom: 14px;
-    }
-
-    @media (max-width: 480px) {
-      .receipt-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .r-label {
-      font-size: 11px;
-      color: var(--label);
-      margin-bottom: 2px;
-    }
-
-    .r-val {
-      font-family: var(--mono);
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--text);
-      word-break: break-all;
-    }
-
-    .r-val.sans {
-      font-family: var(--sans);
-      font-weight: 500;
-    }
+    .receipt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-bottom: 14px; }
+    @media (max-width: 480px) { .receipt-grid { grid-template-columns: 1fr; } }
+    .r-label { font-size: 11px; color: var(--label); margin-bottom: 2px; }
+    .r-val { font-family: var(--mono); font-size: 12.5px; font-weight: 600; color: var(--text); word-break: break-all; }
+    .r-val.sans { font-family: var(--sans); font-weight: 500; }
 
     .reset-link {
       background: none;
@@ -336,33 +226,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
       font-size: 11.5px;
       color: var(--label);
       padding: 0 2px;
     }
 
-    .preset-triggers {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: #9ca3af;
-    }
+    .hidden { display: none !important; }
 
-    .preset-triggers span {
-      cursor: pointer;
-      padding: 2px 3px;
-    }
-
-    .preset-triggers span:hover,
-    .preset-triggers span.active {
-      color: var(--text);
-      font-weight: 700;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* Invalid Website Modal Popup */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -372,17 +244,8 @@
       justify-content: center;
       padding: 16px;
       z-index: 100;
-      animation: fadeIn 0.15s ease-out;
     }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    .modal-backdrop.open { display: flex; }
 
     .modal-box {
       background: #ffffff;
@@ -394,31 +257,9 @@
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
       overflow: hidden;
     }
-
-    .modal-header {
-      padding: 14px 18px;
-      background: var(--red-bg);
-      border-bottom: 1px solid var(--red-border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-title {
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--red);
-    }
-
-    .modal-body {
-      padding: 18px;
-      font-size: 13px;
-      color: var(--text);
-    }
-
+    .modal-header { padding: 14px 18px; background: var(--red-bg); border-bottom: 1px solid var(--red-border); }
+    .modal-title { font-family: var(--mono); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--red); }
+    .modal-body { padding: 18px; font-size: 13px; color: var(--text); }
     .modal-domain-preview {
       font-family: var(--mono);
       font-size: 12px;
@@ -430,24 +271,17 @@
       margin: 10px 0;
       word-break: break-all;
     }
-
-    .modal-footer {
-      padding: 12px 18px;
-      background: var(--subtle-bg);
-      border-top: 1px solid var(--border-light);
-      display: flex;
-      justify-content: flex-end;
-    }
+    .modal-footer { padding: 12px 18px; background: var(--subtle-bg); border-top: 1px solid var(--border-light); display: flex; justify-content: flex-end; }
   </style>
 </head>
 <body>
 
   <div class="wrapper">
     <main class="card">
-      <div class="status-tag">HTTP 403 — ACCESS RESTRICTED</div>
-      <h1>Network Policy Restriction</h1>
-      <p class="lead">
-        Outbound traffic to the requested destination is restricted under Student Dormitory Bandwidth & Security Policy.
+      <div class="status-tag" id="statusTag">HTTP 403 — ACCESS RESTRICTED</div>
+      <h1 id="pageHeading">Network Policy Restriction</h1>
+      <p class="lead" id="leadText">
+        Outbound traffic to restricted recreational or security-flagged destinations is blocked under Student Dormitory Bandwidth & Security Policy.
       </p>
 
       <hr class="divider" />
@@ -455,12 +289,16 @@
       <div class="section-kicker">CONNECTION & POLICY DIAGNOSTICS</div>
       <table class="diag-table">
         <tr>
+          <td class="key">Application / Service</td>
+          <td class="val" id="diagApp">Awaiting intercepted host...</td>
+        </tr>
+        <tr>
           <td class="key">Requested URL</td>
-          <td class="val url-highlight" id="diagUrl">http://www.tiktok.com/</td>
+          <td class="val url-highlight" id="diagUrl">—</td>
         </tr>
         <tr>
           <td class="key">Policy Category & Rule ID</td>
-          <td class="val" id="diagCategory">Recreational Video Streaming (Rule #104)</td>
+          <td class="val" id="diagCategory">Dormitory Content & Threat Policy</td>
         </tr>
         <tr>
           <td class="key">Enforcement Window</td>
@@ -468,31 +306,28 @@
         </tr>
         <tr>
           <td class="key">Client IP / Gateway</td>
-          <td class="val">10.24.18.142 / 10.24.18.1 (Jababeka-Dorm-AP04)</td>
+          <td class="val" id="diagClientIp">Detecting live endpoint IP...</td>
         </tr>
         <tr>
           <td class="key">Event Timestamp</td>
-          <td class="val" id="diagTimestamp">2026-11-23 03:05:00 WIB</td>
+          <td class="val" id="diagTimestamp">Loading live timestamp...</td>
         </tr>
         <tr>
           <td class="key">Incident Reference</td>
-          <td class="val" id="diagRef">NAC-20261123-8841</td>
+          <td class="val" id="diagRef">NAC-00000000-0000</td>
         </tr>
       </table>
 
-      <!-- Exception Ticket Box -->
       <section class="ticket-box">
-        <div class="ticket-title">Submit Academic Exception Ticket</div>
+        <div class="ticket-title" id="ticketBoxTitle">Submit Academic Exception Ticket</div>
         <p class="ticket-desc" id="ticketDesc">
-          If this domain is required for active coursework or research, submit a temporary timed whitelist request for Network Operations review.
+          If this destination is required for active coursework or research, submit a temporary timed whitelist request for Network Operations review.
         </p>
 
-        <!-- Phishing Lockout Message -->
         <div id="phishingLock" class="security-lock hidden">
           <strong>Appeal Unavailable (Rule #001):</strong> Domains flagged under Phishing & Malware Intelligence are permanently restricted and cannot be whitelisted via student exception tickets.
         </div>
 
-        <!-- Ticket Submission Form -->
         <form id="ticketForm" onsubmit="submitExceptionTicket(event)" novalidate>
           <div class="field">
             <label for="nimInput">Student ID (NIM)</label>
@@ -500,56 +335,52 @@
           </div>
           <div class="field">
             <label for="domainInput">Target Domain</label>
-            <input type="text" id="domainInput" class="mono-input" value="tiktok.com" oninput="handleDomainTyping(this.value)" required />
+            <input type="text" id="domainInput" class="mono-input" placeholder="e.g. netflix.com or youtube.com" oninput="handleDomainTyping(this.value)" required />
           </div>
           <div class="field">
             <label for="reasonInput">Course / Academic Purpose</label>
-            <textarea id="reasonInput" rows="2" placeholder="e.g. Studying lecturer tutorial video for ISN assignment" required></textarea>
+            <textarea id="reasonInput" rows="2" placeholder="e.g. Studying documentary / lecture video for ISN assignment" oninput="this.classList.remove('input-invalid')" required></textarea>
           </div>
           <button type="submit" id="submitBtn" class="btn-submit">Submit Exception Ticket</button>
         </form>
 
-        <!-- Logged Receipt Card -->
         <div id="receiptCard" class="receipt-card hidden">
           <div class="receipt-top">
             <span class="receipt-heading">EXCEPTION TICKET LOGGED</span>
-            <span class="receipt-badge">QUEUED FOR TIMED APPROVAL</span>
+            <span id="receiptStatusBadge" class="receipt-badge">QUEUED FOR TIMED APPROVAL</span>
           </div>
           <div class="receipt-grid">
             <div>
               <div class="r-label">Ticket ID</div>
-              <div class="r-val" id="recTicketId">REQ-2026-7416</div>
+              <div class="r-val" id="recTicketId">REQ-2026-0000</div>
             </div>
             <div>
               <div class="r-label">Submitted NIM</div>
-              <div class="r-val" id="recNim">012202600029</div>
+              <div class="r-val" id="recNim">—</div>
             </div>
             <div style="grid-column: 1 / -1;">
-              <div class="r-label">Target Domain</div>
-              <div class="r-val" id="recDomain">http://www.tiktok.com/</div>
+              <div class="r-label">Target Destination</div>
+              <div class="r-val" id="recDomain">—</div>
             </div>
             <div style="grid-column: 1 / -1;">
               <div class="r-label">Course / Academic Purpose</div>
-              <div class="r-val sans" id="recReason">Studying Lecturer Video</div>
+              <div class="r-val sans" id="recReason">—</div>
             </div>
           </div>
-          <button type="button" class="reset-link" onclick="resetTicketForm()">Submit Another Request</button>
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <a id="launchUnlockedBtn" href="#" target="_blank" class="btn-launch hidden">Open Site Now ↗</a>
+            <button type="button" class="reset-link" onclick="resetTicketForm()">Submit Another Request</button>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <span>President University — Dormitory Network Access Control</span>
-      <div class="preset-triggers" title="Scenario presets (Keys 1-4)">
-        <span id="p1" class="active" onclick="applyPreset(1)">1</span> ·
-        <span id="p2" onclick="applyPreset(2)">2</span> ·
-        <span id="p3" onclick="applyPreset(3)">3</span> ·
-        <span id="p4" onclick="applyPreset(4)">4</span>
-      </div>
+      <span style="font-family: var(--mono); font-size: 11px;">DNS + ENDPOINT POLICY ENFORCEMENT</span>
     </footer>
   </div>
 
-  <!-- Invalid Website Validation Popup -->
   <div id="invalidWebsiteModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="invalidModalTitle">
     <div class="modal-box">
       <div class="modal-header">
@@ -559,7 +390,7 @@
         <p id="invalidModalReason">The target website entered cannot be parsed as a valid fully qualified domain name (FQDN).</p>
         <div class="modal-domain-preview" id="invalidModalValue">invalid-input</div>
         <p style="font-size: 12px; color: var(--muted);">
-          Please enter a valid domain name including its extension (for example: <span style="font-family: var(--mono);">youtube.com</span>, <span style="font-family: var(--mono);">scholar.google.com</span>, or <span style="font-family: var(--mono);">president.ac.id</span>).
+          Please enter a valid domain name including its extension (for example: <span style="font-family: var(--mono);">netflix.com</span>, <span style="font-family: var(--mono);">youtube.com</span>, or <span style="font-family: var(--mono);">president.ac.id</span>).
         </p>
       </div>
       <div class="modal-footer">
@@ -582,68 +413,120 @@
       }
     }
 
-    const PRESETS = {
-      1: {
-        domain: "tiktok.com",
-        urlDisplay: "http://www.tiktok.com/",
-        category: "Recreational Video Streaming (Rule #104)",
-        window: "Evening Study Hours (19:00 – 23:00 WIB)",
-        ref: "NAC-20261123-8841",
-        phishing: false
-      },
-      2: {
-        domain: "netflix.com",
-        urlDisplay: "https://www.netflix.com/",
-        category: "High-Bandwidth Media Streaming (Rule #104)",
-        window: "Evening Study Hours (19:00 – 23:00 WIB)",
-        ref: "NAC-20261123-8849",
-        phishing: false
-      },
-      3: {
-        domain: "amtso.org",
-        urlDisplay: "https://www.amtso.org/feature-settings-check-phishing-page/",
-        category: "Phishing & Malware Threat Feed (Rule #001)",
-        window: "24/7 Permanent Security Enforcement",
-        ref: "NAC-20261123-0019",
-        phishing: true
-      },
-      4: {
-        domain: "youtube.com",
-        urlDisplay: "https://www.youtube.com/",
-        category: "Recreational Video Streaming (Rule #104)",
-        window: "Evening Study Hours (19:00 – 23:00 WIB)",
-        ref: "NAC-20261123-8902",
-        phishing: false
-      }
+    const APP_CATALOG = {
+      "netflix.com": { name: "Netflix", urlDisplay: "https://www.netflix.com/", category: "High-Bandwidth Media Streaming (Rule #104)", window: "Evening Study Hours (19:00 – 23:00 WIB)", phishing: false },
+      "tiktok.com": { name: "TikTok", urlDisplay: "https://www.tiktok.com/", category: "Recreational Video Streaming (Rule #104)", window: "Evening Study Hours (19:00 – 23:00 WIB)", phishing: false },
+      "youtube.com": { name: "YouTube", urlDisplay: "https://www.youtube.com/", category: "Recreational Video Streaming (Rule #104)", window: "Evening Study Hours (19:00 – 23:00 WIB)", phishing: false },
+      "instagram.com": { name: "Instagram", urlDisplay: "https://www.instagram.com/", category: "Social Media & Short-Form Video (Rule #104)", window: "Evening Study Hours (19:00 – 23:00 WIB)", phishing: false },
+      "roblox.com": { name: "Roblox", urlDisplay: "https://www.roblox.com/", category: "Gaming & Digital Distribution (Rule #108)", window: "Evening Study Hours (19:00 – 23:00 WIB)", phishing: false },
+      "steampowered.com": { name: "Steam", urlDisplay: "https://store.steampowered.com/", category: "Gaming & Digital Distribution (Rule #108)", window: "Evening Study Hours (19:00 – 23:00 WIB)", phishing: false },
+      "discord.com": { name: "Discord", urlDisplay: "https://discord.com/", category: "Gaming & Voice Distribution (Rule #108)", window: "Evening Study Hours (19:00 – 23:00 WIB)", phishing: false },
+      "amtso.org": { name: "AMTSO Phishing Test", urlDisplay: "https://www.amtso.org/feature-settings-check-phishing-page/", category: "Phishing & Malware Threat Feed (Rule #001)", window: "24/7 Permanent Security Enforcement", phishing: true }
     };
 
     let currentPhishing = false;
+    let activeTicketCode = null;
+    let activeTicketPoll = null;
+    let activeTicketCountdown = null;
+    let activeExpiresAtMs = null;
 
     function formatWibTimestamp() {
       const now = new Date();
-      const pad = (n) => String(n).padStart(2, "0");
-      return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())} WIB`;
+      const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Asia/Jakarta",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      }).formatToParts(now);
+      const get = (type) => parts.find((p) => p.type === type)?.value || "00";
+      return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")}:${get("second")} WIB`;
+    }
+
+    function generateIncidentRef() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      return `NAC-${y}${m}${d}-${rand}`;
+    }
+
+    async function detectRealNetworkTelemetry() {
+      const targetEl = document.getElementById("diagClientIp");
+      let localIp = null;
+      let publicIp = null;
+
+      try {
+        localIp = await new Promise((resolve) => {
+          const RTCPeer = window.RTCPeerConnection || window.webkitRTCPeerConnection;
+          if (!RTCPeer) return resolve(null);
+
+          const pc = new RTCPeer({ iceServers: [] });
+          pc.createDataChannel("");
+          pc.createOffer().then((offer) => pc.setLocalDescription(offer)).catch(() => resolve(null));
+
+          const timeout = setTimeout(() => { pc.close(); resolve(null); }, 1500);
+
+          pc.onicecandidate = (event) => {
+            if (!event || !event.candidate || !event.candidate.candidate) return;
+            const match = event.candidate.candidate.match(/(\d{1,3}(?:\.\d{1,3}){3})/);
+            if (match && !match[1].startsWith("127.")) {
+              clearTimeout(timeout);
+              pc.close();
+              resolve(match[1]);
+            }
+          };
+        });
+      } catch (e) { localIp = null; }
+
+      try {
+        const res = await fetch("https://api64.ipify.org?format=json");
+        const data = await res.json();
+        if (data && data.ip) publicIp = data.ip;
+      } catch (e) { publicIp = null; }
+
+      if (localIp && publicIp && localIp !== publicIp) {
+        const octets = localIp.split(".");
+        const gateway = octets.length === 4 ? `${octets[0]}.${octets[1]}.${octets[2]}.1` : "10.24.18.1";
+        targetEl.textContent = `${localIp} / GW ${gateway} · WAN ${publicIp} (Jababeka-Dorm-AP04)`;
+      } else if (localIp) {
+        const octets = localIp.split(".");
+        const gateway = octets.length === 4 ? `${octets[0]}.${octets[1]}.${octets[2]}.1` : "10.24.18.1";
+        targetEl.textContent = `${localIp} / ${gateway} (Jababeka-Dorm-AP04)`;
+      } else if (publicIp) {
+        targetEl.textContent = `${publicIp} / NAT-GW (Jababeka-Dorm-AP04)`;
+      } else {
+        targetEl.textContent = "10.24.18.142 / 10.24.18.1 (Jababeka-Dorm-AP04)";
+      }
     }
 
     function cleanDomain(raw) {
       return raw.toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0].split("?")[0].split("#")[0].trim();
     }
 
+    function formatAppName(cleanedDomain) {
+      if (!cleanedDomain) return "";
+      if (APP_CATALOG[cleanedDomain]) return APP_CATALOG[cleanedDomain].name;
+      const parentKey = Object.keys(APP_CATALOG).find((k) => cleanedDomain.endsWith("." + k));
+      if (parentKey) return APP_CATALOG[parentKey].name;
+      const base = cleanedDomain.split(".")[0];
+      return base.charAt(0).toUpperCase() + base.slice(1);
+    }
+
     function validateDomain(rawInput) {
       const trimmed = rawInput.trim();
-      if (!trimmed) {
-        return { valid: false, reason: "Target website field cannot be empty." };
-      }
-      if (/\s/.test(trimmed)) {
-        return { valid: false, reason: "Website domains cannot contain spaces." };
-      }
+      if (!trimmed) return { valid: false, reason: "Target website field cannot be empty." };
+      if (/\s/.test(trimmed)) return { valid: false, reason: "Website domains cannot contain spaces." };
 
       const cleaned = cleanDomain(trimmed);
       if (!cleaned || !cleaned.includes(".")) {
         return { valid: false, reason: "Missing top-level domain extension (e.g., .com, .org, .ac.id)." };
       }
 
-      // Strict FQDN regex check (labels 1-63 chars, alphanumeric/hyphen, valid 2+ char TLD)
       const fqdnRegex = /^(?!-)[a-z0-9-]{1,63}(?<!-)(\.(?!-)[a-z0-9-]{1,63}(?<!-))*\.[a-z]{2,24}$/;
       if (!fqdnRegex.test(cleaned)) {
         return { valid: false, reason: "Invalid domain syntax or unsupported characters detected." };
@@ -669,25 +552,17 @@
 
     function inferPolicy(domain) {
       const d = cleanDomain(domain);
+      if (APP_CATALOG[d]) return APP_CATALOG[d];
+      const parentKey = Object.keys(APP_CATALOG).find((k) => d.endsWith("." + k));
+      if (parentKey) return APP_CATALOG[parentKey];
+
       if (d.includes("amtso") || d.includes("phish") || d.includes("malware")) {
-        return {
-          category: "Phishing & Malware Threat Feed (Rule #001)",
-          window: "24/7 Permanent Security Enforcement",
-          phishing: true
-        };
+        return { name: formatAppName(d), urlDisplay: d ? `https://www.${d}/` : "—", category: "Phishing & Malware Threat Feed (Rule #001)", window: "24/7 Permanent Security Enforcement", phishing: true };
       }
       if (d.includes("steam") || d.includes("roblox") || d.includes("discord")) {
-        return {
-          category: "Gaming & Digital Distribution (Rule #108)",
-          window: "Evening Study Hours (19:00 – 23:00 WIB)",
-          phishing: false
-        };
+        return { name: formatAppName(d), urlDisplay: d ? `https://www.${d}/` : "—", category: "Gaming & Digital Distribution (Rule #108)", window: "Evening Study Hours (19:00 – 23:00 WIB)", phishing: false };
       }
-      return {
-        category: "Recreational Video Streaming (Rule #104)",
-        window: "Evening Study Hours (19:00 – 23:00 WIB)",
-        phishing: false
-      };
+      return { name: formatAppName(d), urlDisplay: d ? `https://www.${d}/` : "—", category: "Recreational Video Streaming (Rule #104)", window: "Evening Study Hours (19:00 – 23:00 WIB)", phishing: false };
     }
 
     function updateLockState(isPhishing) {
@@ -702,42 +577,125 @@
         receiptEl.classList.add("hidden");
       } else {
         lockEl.classList.add("hidden");
-        if (receiptEl.classList.contains("hidden")) {
-          formEl.classList.remove("hidden");
-        }
+        if (receiptEl.classList.contains("hidden")) formEl.classList.remove("hidden");
       }
     }
 
-    function applyPreset(num) {
-      const p = PRESETS[num];
-      if (!p) return;
+    function renderTargetContext(rawDomain, customFullUrl = null) {
+      const cleaned = cleanDomain(rawDomain);
+      if (!cleaned) {
+        document.title = "HTTP 403 — Network Policy Restriction";
+        document.getElementById("statusTag").textContent = "HTTP 403 — ACCESS RESTRICTED";
+        document.getElementById("pageHeading").textContent = "Network Policy Restriction";
+        document.getElementById("leadText").textContent =
+          "Outbound traffic to restricted recreational or security-flagged destinations is blocked under Student Dormitory Bandwidth & Security Policy.";
+        document.getElementById("diagApp").textContent = "Awaiting target host...";
+        document.getElementById("diagUrl").textContent = "—";
+        document.getElementById("diagCategory").textContent = "Dormitory Content & Threat Policy";
+        document.getElementById("diagWindow").textContent = "Evening Study Hours (19:00 – 23:00 WIB)";
+        document.getElementById("ticketBoxTitle").textContent = "Submit Academic Exception Ticket";
+        document.getElementById("ticketDesc").textContent =
+          "If a restricted destination is required for active coursework or research, submit a temporary timed whitelist request for Network Operations review.";
+        updateLockState(false);
+        return;
+      }
 
-      [1, 2, 3, 4].forEach((i) => {
-        document.getElementById("p" + i).classList.toggle("active", i === num);
-      });
+      const info = inferPolicy(cleaned);
+      const appName = info.name;
+      const displayUrl = customFullUrl || info.urlDisplay;
+      const shortCategory = info.category.replace(/\s*\(Rule #\d+\)/, "");
 
-      document.getElementById("diagUrl").textContent = p.urlDisplay;
-      document.getElementById("diagCategory").textContent = p.category;
-      document.getElementById("diagWindow").textContent = p.window;
-      document.getElementById("diagTimestamp").textContent = formatWibTimestamp();
-      document.getElementById("diagRef").textContent = p.ref;
-      document.getElementById("domainInput").value = p.domain;
-      document.getElementById("domainInput").classList.remove("input-invalid");
+      document.title = `HTTP 403 — ${appName} Restricted`;
+      document.getElementById("statusTag").textContent = `HTTP 403 — ${appName.toUpperCase()} RESTRICTED`;
+      document.getElementById("pageHeading").textContent = `Access to ${appName} Restricted`;
+      document.getElementById("leadText").innerHTML =
+        `Outbound connection to <strong>${appName}</strong> (<span style="font-family: var(--mono);">${cleaned}</span>) is blocked under Student Dormitory Bandwidth & Security Policy.`;
 
-      resetTicketForm();
-      updateLockState(p.phishing);
+      document.getElementById("diagApp").textContent = `${appName} (${shortCategory})`;
+      document.getElementById("diagUrl").textContent = displayUrl;
+      document.getElementById("diagCategory").textContent = info.category;
+      document.getElementById("diagWindow").textContent = info.window;
+
+      document.getElementById("ticketBoxTitle").textContent = `Submit Academic Exception Ticket for ${appName}`;
+      document.getElementById("ticketDesc").innerHTML =
+        `If access to <strong>${appName}</strong> is required for active coursework or research, submit a temporary timed whitelist request for Network Operations review.`;
+
+      updateLockState(info.phishing);
     }
 
     function handleDomainTyping(val) {
       document.getElementById("domainInput").classList.remove("input-invalid");
-      const d = cleanDomain(val);
-      const display = d ? `http://www.${d}/` : "http://www.example.com/";
-      document.getElementById("diagUrl").textContent = display;
+      renderTargetContext(val);
+    }
 
-      const info = inferPolicy(d);
-      document.getElementById("diagCategory").textContent = info.category;
-      document.getElementById("diagWindow").textContent = info.window;
-      updateLockState(info.phishing);
+    function startReceiptLiveSync(ticketCode, targetUrl, appName) {
+      stopReceiptLiveSync();
+      activeTicketCode = ticketCode;
+
+      const badge = document.getElementById("receiptStatusBadge");
+      const launchBtn = document.getElementById("launchUnlockedBtn");
+      badge.className = "receipt-badge";
+      badge.textContent = "QUEUED FOR TIMED APPROVAL";
+      launchBtn.classList.add("hidden");
+      launchBtn.href = targetUrl;
+      launchBtn.textContent = `Open ${appName} Now ↗`;
+
+      activeTicketPoll = setInterval(async () => {
+        if (!supabaseClient || !activeTicketCode) return;
+        const { data, error } = await supabaseClient
+          .from("unblock_requests")
+          .select("status, expires_at")
+          .eq("ticket_code", activeTicketCode)
+          .maybeSingle();
+
+        if (error) return;
+
+        if (!data) {
+          badge.className = "receipt-badge rejected";
+          badge.textContent = "ACCESS EXPIRED — RE-BLOCKED";
+          launchBtn.classList.add("hidden");
+          stopReceiptLiveSync();
+          return;
+        }
+
+        if (data.status === "approved") {
+          badge.className = "receipt-badge approved";
+          launchBtn.classList.remove("hidden");
+          activeExpiresAtMs = data.expires_at ? new Date(data.expires_at).getTime() : null;
+
+          if (!activeTicketCountdown && activeExpiresAtMs) {
+            activeTicketCountdown = setInterval(() => {
+              const rem = activeExpiresAtMs - Date.now();
+              if (rem <= 0) {
+                badge.className = "receipt-badge rejected";
+                badge.textContent = "ACCESS EXPIRED — RE-BLOCKED";
+                launchBtn.classList.add("hidden");
+                stopReceiptLiveSync();
+              } else {
+                const sec = Math.ceil(rem / 1000);
+                const m = String(Math.floor(sec / 60)).padStart(2, "0");
+                const s = String(sec % 60).padStart(2, "0");
+                badge.textContent = `ACCESS GRANTED (${m}:${s} LEFT)`;
+              }
+            }, 500);
+          } else if (!activeExpiresAtMs) {
+            badge.textContent = "ACCESS GRANTED — ACTIVE";
+          }
+        } else if (data.status === "rejected") {
+          badge.className = "receipt-badge rejected";
+          badge.textContent = "REJECTED BY NETWORK OPS";
+          launchBtn.classList.add("hidden");
+          stopReceiptLiveSync();
+        }
+      }, 3000);
+    }
+
+    function stopReceiptLiveSync() {
+      if (activeTicketPoll) clearInterval(activeTicketPoll);
+      if (activeTicketCountdown) clearInterval(activeTicketCountdown);
+      activeTicketPoll = null;
+      activeTicketCountdown = null;
+      activeExpiresAtMs = null;
     }
 
     async function submitExceptionTicket(e) {
@@ -752,24 +710,22 @@
       const rawDomain = domainInput.value.trim();
       const reason = reasonInput.value.trim();
 
-      // 1. Validate website domain first and show modal popup if invalid
       const validation = validateDomain(rawDomain);
       if (!validation.valid) {
         showInvalidWebsiteModal(rawDomain, validation.reason);
         return;
       }
 
-      if (!nim) {
-        nimInput.focus();
-        return;
-      }
+      if (!nim) { nimInput.classList.add("input-invalid"); nimInput.focus(); return; }
+      if (!reason) { reasonInput.classList.add("input-invalid"); reasonInput.focus(); return; }
 
-      if (!reason) {
-        reasonInput.focus();
-        return;
-      }
+      localStorage.setItem("studyshield_last_nim", nim);
 
       const domain = validation.domain;
+      const appName = formatAppName(domain);
+      const targetUrl = document.getElementById("diagUrl").textContent.startsWith("http")
+        ? document.getElementById("diagUrl").textContent
+        : `https://www.${domain}/`;
       const category = document.getElementById("diagCategory").textContent;
       const ticketCode = `REQ-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
@@ -779,14 +735,7 @@
 
       if (supabaseClient) {
         const { error } = await supabaseClient.from("unblock_requests").insert([
-          {
-            ticket_code: ticketCode,
-            student_id: nim,
-            domain: domain,
-            category: category,
-            reason: reason,
-            status: "pending"
-          }
+          { ticket_code: ticketCode, student_id: nim, domain: domain, category: category, reason: reason, status: "pending" }
         ]);
 
         if (error) {
@@ -815,41 +764,47 @@
 
       document.getElementById("recTicketId").textContent = ticketCode;
       document.getElementById("recNim").textContent = nim;
-      document.getElementById("recDomain").textContent = `http://www.${domain}/`;
+      document.getElementById("recDomain").textContent = targetUrl;
       document.getElementById("recReason").textContent = reason;
 
       document.getElementById("ticketForm").classList.add("hidden");
       document.getElementById("receiptCard").classList.remove("hidden");
+
+      startReceiptLiveSync(ticketCode, targetUrl, appName);
     }
 
     function resetTicketForm() {
+      stopReceiptLiveSync();
       document.getElementById("reasonInput").value = "";
       document.getElementById("receiptCard").classList.add("hidden");
-      if (!currentPhishing) {
-        document.getElementById("ticketForm").classList.remove("hidden");
-      }
+      if (!currentPhishing) document.getElementById("ticketForm").classList.remove("hidden");
     }
+
+    document.getElementById("nimInput").addEventListener("input", function () { this.classList.remove("input-invalid"); });
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && document.getElementById("invalidWebsiteModal").classList.contains("open")) {
         closeInvalidModal();
-        return;
-      }
-      if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
-      if (["1", "2", "3", "4"].includes(e.key)) {
-        applyPreset(Number(e.key));
       }
     });
+
+    const savedNim = localStorage.getItem("studyshield_last_nim");
+    if (savedNim) document.getElementById("nimInput").value = savedNim;
+
+    detectRealNetworkTelemetry();
+    document.getElementById("diagTimestamp").textContent = formatWibTimestamp();
+    setInterval(() => { document.getElementById("diagTimestamp").textContent = formatWibTimestamp(); }, 1000);
+    document.getElementById("diagRef").textContent = generateIncidentRef();
 
     const params = new URLSearchParams(window.location.search);
     const queryDomain = params.get("domain") || params.get("url");
     if (queryDomain) {
       const cleaned = cleanDomain(queryDomain);
+      const fullUrl = /^https?:\/\//i.test(queryDomain.trim()) ? queryDomain.trim() : null;
       document.getElementById("domainInput").value = cleaned;
-      document.getElementById("diagTimestamp").textContent = formatWibTimestamp();
-      handleDomainTyping(cleaned);
+      renderTargetContext(cleaned, fullUrl);
     } else {
-      applyPreset(1);
+      renderTargetContext("");
     }
   </script>
 </body>
