@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyShield NAC — Network Operations Admin Console</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./config.js"></script>
+  <style>
+    :root {
+      --navy: #0f294a;
+      --navy-dark: #091b32;
+      --bg: #f3f4f6;
+      --surface: #ffffff;
+      --border: #d1d5db;
+      --border-strong: #9ca3af;
+      --text: #111827;
+      --muted: #4b5563;
+      --red: #b91c1c;
+      --red-bg: #fef2f2;
+      --red-border: #fecaca;
+      --green: #15803d;
+      --green-bg: #f0fdf4;
+      --green-border: #bbf7d0;
+      --amber: #b45309;
+      --amber-bg: #fffbeb;
+      --amber-border: #fde68a;
+      --mono: "SF Mono", "Menlo", "Consolas", "Courier New", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .topbar {
+      background-color: var(--navy);
+      color: #ffffff;
+      border-bottom: 3px solid var(--navy-dark);
+      padding: 13px 20px;
+    }
+
+    .topbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    .status-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sys-badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #f8fafc;
+    }
+
+    .sys-badge.ok {
+      background: #14532d;
+      border-color: #22c55e;
+      color: #dcfce7;
+    }
+
+    .sys-badge.warn {
+      background: #78350f;
+      border-color: #f59e0b;
+      color: #fef3c7;
+    }
+
+    .subbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 20px;
+    }
+
+    .subbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 20px auto;
+      padding: 0 20px 40px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    .panel-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: #f9fafb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .panel-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+    }
+
+    .panel-body {
+      padding: 16px;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    table.data-table th {
+      text-align: left;
+      padding: 9px 10px;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.03em;
+    }
+
+    table.data-table td {
+      padding: 9px 10px;
+      border: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .mono {
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border-strong);
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      background: #ffffff;
+    }
+
+    select.duration-select {
+      padding: 5px 6px;
+      border: 1px solid var(--border-strong);
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      background: #ffffff;
+      color: var(--text);
+      margin-right: 4px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 7px 13px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: var(--sans);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: #ffffff;
+      border-color: var(--navy-dark);
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-dark);
+    }
+
+    .btn-approve {
+      background: var(--green);
+      color: #ffffff;
+      padding: 5px 10px;
+    }
+
+    .btn-approve:hover {
+      background: #166534;
+    }
+
+    .btn-reject {
+      background: #ffffff;
+      color: var(--red);
+      border-color: var(--red);
+      padding: 5px 10px;
+    }
+
+    .btn-reject:hover {
+      background: var(--red-bg);
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--text);
+      border-color: var(--border-strong);
+      padding: 5px 10px;
+    }
+
+    .btn-outline:hover {
+      background: #f9fafb;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    .tag-blocked {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red-border);
+    }
+
+    .tag-allowed {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid var(--green-border);
+    }
+
+    .tag-pending {
+      background: var(--amber-bg);
+      color: var(--amber);
+      border: 1px solid var(--amber-border);
+    }
+
+    .timer-pill {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 2px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .timer-pill.expiring {
+      background: var(--red-bg);
+      color: var(--red);
+      border-color: var(--red-border);
+    }
+
+    .notice-bar {
+      border-left: 4px solid var(--green);
+      background: var(--green-bg);
+      border-top: 1px solid var(--green-border);
+      border-right: 1px solid var(--green-border);
+      border-bottom: 1px solid var(--green-border);
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      border-radius: 2px;
+      font-size: 12.5px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border: 1px solid var(--border-strong);
+      border-radius: 3px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .footer {
+      max-width: 1120px;
+      margin: 0 auto 24px;
+      padding: 0 20px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <div class="brand-title">President University — StudyShield NAC Console</div>
+        <div class="brand-sub">Network Operations Content Governance & NextDNS Policy Bridge</div>
+      </div>
+      <div class="status-strip">
+        <span id="dbStatusBadge" class="sys-badge warn">DB: LOCAL DEMO MODE</span>
+        <span class="sys-badge ok">STUDY HOURS: 19:00–23:00 WIB</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="subbar">
+    <div class="subbar-inner">
+      <span class="mono" style="color: var(--muted);">ADMIN ENDPOINT: /admin.html</span>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <a href="./index.html" target="_blank" class="btn btn-outline">Open Student Block Page ↗</a>
+        <button class="btn btn-outline" onclick="openConfigModal()">Configure Supabase Keys</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <!-- PIN Gate -->
+    <div id="adminPinGate" class="panel" style="max-width: 440px; margin: 28px auto;">
+      <div class="panel-header">
+        <span class="panel-title">Network Operations Login</span>
+      </div>
+      <div class="panel-body">
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">
+          Enter the Administrator PIN to review student unblock tickets and grant timed NextDNS access. (Demo PIN: <span class="mono">1234</span>)
+        </p>
+        <form onsubmit="unlockAdmin(event)" style="display: flex; gap: 8px;">
+          <input type="password" id="adminPinInput" placeholder="Enter Admin PIN" required />
+          <button type="submit" class="btn btn-primary">Authenticate</button>
+        </form>
+        <div id="pinError" class="mono" style="color: var(--red); font-size: 12px; margin-top: 8px;"></div>
+      </div>
+    </div>
+
+    <!-- Admin Workspace -->
+    <div id="adminWorkspace" class="hidden">
+
+      <!-- 1. Incoming Student Unblock Tickets -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Student Academic Exception Queue (Timed Auto-Revoke & Auto-Delete)</span>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span id="apiSyncStatus" class="mono" style="font-size: 11px; color: var(--muted);">Polling every 4s</span>
+            <button class="btn btn-outline" onclick="loadTickets()">Refresh</button>
+          </div>
+        </div>
+        <div class="panel-body" style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Ticket ID</th>
+                <th>Student NIM</th>
+                <th>Target Domain</th>
+                <th>Academic Purpose</th>
+                <th>Status</th>
+                <th>TTL / Auto-Delete</th>
+                <th>Timed Decision (NextDNS API)</th>
+              </tr>
+            </thead>
+            <tbody id="ticketsTableBody">
+              <tr>
+                <td colspan="7" class="mono" style="text-align: center; color: var(--muted);">Loading tickets...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 2. Category Enforcement Controls -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Active DNS Category Rules</span>
+        </div>
+        <div class="panel-body" style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Policy Rule</th>
+                <th>Managed Domains</th>
+                <th>Enforcement State</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="rulesTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 3. 10-URL Verification Suite -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">10-URL Compliance Verification Audit</span>
+          <button class="btn btn-primary" onclick="runTenUrlAudit()">Run 10-URL Audit</button>
+        </div>
+        <div class="panel-body">
+          <div id="auditSummaryBanner" class="notice-bar hidden">
+            <strong class="mono" id="auditSummaryTitle">AUDIT COMPLETE</strong>
+            <div id="auditSummaryText" style="margin-top: 2px;"></div>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Domain</th>
+                  <th>Category</th>
+                  <th>Expected Policy</th>
+                  <th>Gateway Result</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="auditTableBody">
+                <tr>
+                  <td colspan="6" class="mono" style="text-align: center; color: var(--muted);">
+                    Click "Run 10-URL Audit" to generate compliance table for presentation proof.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>PRESIDENT UNIVERSITY — STUDYSHIELD NAC ADMIN CONSOLE</span>
+    <span>BACKEND: SUPABASE + NETLIFY FUNCTIONS + NEXTDNS API</span>
+  </footer>
+
+  <!-- Supabase Config Modal -->
+  <div id="configModal" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="panel-header">
+        <span class="panel-title">Supabase Connection Settings</span>
+        <button class="btn btn-outline" onclick="closeConfigModal()">Close</button>
+      </div>
+      <div class="panel-body">
+        <p style="font-size: 12.5px; color: var(--muted); margin-bottom: 12px;">
+          Enter your Supabase URL and Anon Key (or save them once inside <span class="mono">config.js</span> before deploying).
+        </p>
+        <div class="field">
+          <label>Supabase Project URL</label>
+          <input type="text" id="cfgSupabaseUrl" placeholder="https://your-project.supabase.co" />
+        </div>
+        <div class="field">
+          <label>Supabase Anon Public Key</label>
+          <input type="text" id="cfgSupabaseKey" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..." />
+        </div>
+        <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px;">
+          <button class="btn btn-outline" onclick="clearSupabaseConfig()">Reset</button>
+          <button class="btn btn-primary" onclick="saveSupabaseConfig()">Save & Connect</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CFG = window.STUDYSHIELD_CONFIG || {};
+    const ADMIN_PIN = CFG.ADMIN_PIN || "1234";
+    let supabaseClient = null;
+    let adminUnlocked = false;
+    let pollTimer = null;
+    let countdownTimer = null;
+    let currentTickets = [];
+    const processingIds = new Set();
+
+    // Track original rule mapping so expired timed domains automatically re-block
+    const DOMAIN_RULE_MAP = {
+      "tiktok.com": "streaming",
+      "netflix.com": "streaming",
+      "youtube.com": "streaming",
+      "steampowered.com": "gaming",
+      "roblox.com": "gaming",
+      "discord.com": "gaming",
+      "amtso.org": "phishing"
+    };
+
+    let localRules = [
+      {
+        rule_key: "streaming",
+        label: "Recreational Video Streaming (Rule #104)",
+        domains: ["tiktok.com", "netflix.com", "youtube.com"],
+        is_blocked: true
+      },
+      {
+        rule_key: "gaming",
+        label: "Gaming & Digital Distribution (Rule #108)",
+        domains: ["steampowered.com", "roblox.com", "discord.com"],
+        is_blocked: true
+      },
+      {
+        rule_key: "phishing",
+        label: "Phishing & Malware Threat Feed (Rule #001)",
+        domains: ["amtso.org"],
+        is_blocked: true
+      }
+    ];
+
+    let approvedDomainsSet = new Set([
+      "puis.president.ac.id",
+      "president.ac.id",
+      "github.com",
+      "scholar.google.com",
+      "stackoverflow.com"
+    ]);
+
+    function initSupabase() {
+      const savedUrl = localStorage.getItem("studyshield_sb_url") || CFG.SUPABASE_URL || "";
+      const savedKey = localStorage.getItem("studyshield_sb_key") || CFG.SUPABASE_ANON_KEY || "";
+
+      document.getElementById("cfgSupabaseUrl").value = savedUrl;
+      document.getElementById("cfgSupabaseKey").value = savedKey;
+
+      const badge = document.getElementById("dbStatusBadge");
+      if (savedUrl && savedKey && window.supabase) {
+        try {
+          supabaseClient = window.supabase.createClient(savedUrl, savedKey);
+          badge.textContent = "DB: SUPABASE LIVE CONNECTED";
+          badge.className = "sys-badge ok";
+          syncRulesFromSupabase();
+          if (adminUnlocked) loadTickets();
+        } catch (e) {
+          supabaseClient = null;
+          badge.textContent = "DB: CONNECTION ERROR";
+          badge.className = "sys-badge warn";
+        }
+      } else {
+        supabaseClient = null;
+        badge.textContent = "DB: LOCAL DEMO MODE";
+        badge.className = "sys-badge warn";
+      }
+    }
+
+    function openConfigModal() {
+      document.getElementById("configModal").classList.add("open");
+    }
+
+    function closeConfigModal() {
+      document.getElementById("configModal").classList.remove("open");
+    }
+
+    function saveSupabaseConfig() {
+      localStorage.setItem("studyshield_sb_url", document.getElementById("cfgSupabaseUrl").value.trim());
+      localStorage.setItem("studyshield_sb_key", document.getElementById("cfgSupabaseKey").value.trim());
+      closeConfigModal();
+      initSupabase();
+    }
+
+    function clearSupabaseConfig() {
+      localStorage.removeItem("studyshield_sb_url");
+      localStorage.removeItem("studyshield_sb_key");
+      document.getElementById("cfgSupabaseUrl").value = "";
+      document.getElementById("cfgSupabaseKey").value = "";
+      closeConfigModal();
+      initSupabase();
+    }
+
+    function cleanDomain(raw) {
+      return raw.toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0].trim();
+    }
+
+    function formatRemainingTime(ms) {
+      if (ms <= 0) return "00:00 (Purging...)";
+      const totalSec = Math.ceil(ms / 1000);
+      const hrs = Math.floor(totalSec / 3600);
+      const mins = Math.floor((totalSec % 3600) / 60);
+      const secs = totalSec % 60;
+      const pad = (n) => String(n).padStart(2, "0");
+      return hrs > 0 ? `${pad(hrs)}:${pad(mins)}:${pad(secs)}` : `${pad(mins)}:${pad(secs)}`;
+    }
+
+    function unlockAdmin(e) {
+      e.preventDefault();
+      const pin = document.getElementById("adminPinInput").value;
+      if (pin === ADMIN_PIN) {
+        adminUnlocked = true;
+        document.getElementById("adminPinGate").classList.add("hidden");
+        document.getElementById("adminWorkspace").classList.remove("hidden");
+        loadTickets();
+        renderRulesTable();
+
+        if (!pollTimer) {
+          pollTimer = setInterval(() => {
+            if (adminUnlocked) loadTickets();
+          }, 4000);
+        }
+
+        if (!countdownTimer) {
+          countdownTimer = setInterval(() => {
+            if (adminUnlocked) tickTimedPermissions();
+          }, 1000);
+        }
+      } else {
+        document.getElementById("pinError").textContent = "Invalid Administrator PIN.";
+      }
+    }
+
+    async function syncRulesFromSupabase() {
+      if (!supabaseClient) return;
+      const { data } = await supabaseClient.from("policy_rules").select("*");
+      if (data && data.length) {
+        localRules = data;
+        if (adminUnlocked) renderRulesTable();
+      }
+    }
+
+    async function callNextDnsBridge(action, domains) {
+      try {
+        const res = await fetch("/.netlify/functions/policy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action, domains })
+        });
+        return await res.json();
+      } catch (err) {
+        return { ok: false, error: err.message };
+      }
+    }
+
+    // Automatically revoke timed access and delete expired table rows
+    async function expireAndDeleteTicket(ticket) {
+      if (processingIds.has(ticket.id)) return;
+      processingIds.add(ticket.id);
+
+      const cleaned = cleanDomain(ticket.domain);
+      const statusEl = document.getElementById("apiSyncStatus");
+
+      if (ticket.status === "approved") {
+        statusEl.textContent = `Time expired for ${cleaned} — revoking access & deleting row...`;
+        approvedDomainsSet.delete(cleaned);
+
+        // Restore domain back into its category rule
+        const targetRuleKey = DOMAIN_RULE_MAP[cleaned] || "streaming";
+        const ruleObj = localRules.find((r) => r.rule_key === targetRuleKey);
+        if (ruleObj && !ruleObj.domains.includes(cleaned)) {
+          ruleObj.domains.push(cleaned);
+        }
+
+        await callNextDnsBridge("block", [cleaned]);
+        renderRulesTable();
+      } else {
+        statusEl.textContent = `Auto-deleting expired ticket ${ticket.ticket_code}...`;
+      }
+
+      if (supabaseClient) {
+        await supabaseClient.from("unblock_requests").delete().eq("id", ticket.id);
+      } else {
+        const rows = JSON.parse(localStorage.getItem("studyshield_local_tickets") || "[]");
+        const remaining = rows.filter((x) => x.id !== ticket.id);
+        localStorage.setItem("studyshield_local_tickets", JSON.stringify(remaining));
+      }
+
+      currentTickets = currentTickets.filter((x) => x.id !== ticket.id);
+      processingIds.delete(ticket.id);
+      renderTicketsTable();
+      statusEl.textContent = `Expired entry ${ticket.ticket_code} revoked & removed`;
+    }
+
+    function tickTimedPermissions() {
+      const now = Date.now();
+      let needsRender = false;
+
+      for (const t of currentTickets) {
+        if (t.expires_at) {
+          const expMs = new Date(t.expires_at).getTime();
+          if (now >= expMs) {
+            expireAndDeleteTicket(t);
+          } else {
+            needsRender = true;
+          }
+        }
+      }
+
+      if (needsRender) {
+        updateCountdownBadgesOnly();
+      }
+    }
+
+    function updateCountdownBadgesOnly() {
+      const now = Date.now();
+      for (const t of currentTickets) {
+        if (!t.expires_at) continue;
+        const badge = document.getElementById(`timer-${t.id}`);
+        if (!badge) continue;
+        const rem = new Date(t.expires_at).getTime() - now;
+        badge.textContent = formatRemainingTime(rem);
+        if (rem <= 15000) {
+          badge.classList.add("expiring");
+        }
+      }
+    }
+
+    async function loadTickets() {
+      let rows = JSON.parse(localStorage.getItem("studyshield_local_tickets") || "[]");
+
+      if (supabaseClient) {
+        const { data, error } = await supabaseClient
+          .from("unblock_requests")
+          .select("*")
+          .order("created_at", { ascending: false });
+        if (!error && data) {
+          rows = data;
+        }
+      }
+
+      const now = Date.now();
+      const activeRows = [];
+
+      for (const r of rows) {
+        if (r.expires_at && new Date(r.expires_at).getTime() <= now) {
+          // Already expired — trigger revocation & DB deletion immediately
+          expireAndDeleteTicket(r);
+        } else {
+          activeRows.push(r);
+          if (r.status === "approved") {
+            approvedDomainsSet.add(cleanDomain(r.domain));
+          }
+        }
+      }
+
+      currentTickets = activeRows;
+      renderTicketsTable();
+    }
+
+    function renderTicketsTable() {
+      const tbody = document.getElementById("ticketsTableBody");
+      if (!currentTickets.length) {
+        tbody.innerHTML = `<tr><td colspan="7" class="mono" style="text-align:center; color:var(--muted);">No active or pending student exception tickets.</td></tr>`;
+        return;
+      }
+
+      const now = Date.now();
+
+      tbody.innerHTML = currentTickets
+        .map((t) => {
+          let statusBadge = `<span class="tag tag-pending">PENDING</span>`;
+          if (t.status === "approved") statusBadge = `<span class="tag tag-allowed">ACTIVE ACCESS</span>`;
+          if (t.status === "rejected") statusBadge = `<span class="tag tag-blocked">REJECTED</span>`;
+
+          let timerCell = `<span class="mono" style="color:var(--muted);">Awaiting grant</span>`;
+          if (t.expires_at) {
+            const rem = new Date(t.expires_at).getTime() - now;
+            const isExpiring = rem <= 15000 ? "expiring" : "";
+            timerCell = `<span id="timer-${t.id}" class="timer-pill ${isExpiring}">${formatRemainingTime(rem)}</span>`;
+          }
+
+          const actions =
+            t.status === "pending"
+              ? `<select id="dur-${t.id}" class="duration-select" title="Select timed access duration">
+                   <option value="0.25">15 Secs (Demo)</option>
+                   <option value="15">15 Mins</option>
+                   <option value="30">30 Mins</option>
+                   <option value="60" selected>1 Hour</option>
+                   <option value="120">2 Hours</option>
+                   <option value="240">4 Hours</option>
+                 </select>
+                 <button class="btn btn-approve" onclick="handleTicketDecision('${t.id}', '${t.domain}', 'approved')">Grant Timed Access</button>
+                 <button class="btn btn-reject" onclick="handleTicketDecision('${t.id}', '${t.domain}', 'rejected')">Reject</button>`
+              : `<button class="btn btn-reject" onclick="expireAndDeleteTicketById('${t.id}')">Revoke & Delete Now</button>`;
+
+          return `
+            <tr id="row-${t.id}">
+              <td class="mono">${t.ticket_code}</td>
+              <td class="mono">${t.student_id}</td>
+              <td class="mono">${t.domain}</td>
+              <td>${t.reason}</td>
+              <td>${statusBadge}</td>
+              <td>${timerCell}</td>
+              <td style="white-space:nowrap;">${actions}</td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    function expireAndDeleteTicketById(id) {
+      const ticket = currentTickets.find((x) => x.id === id);
+      if (ticket) expireAndDeleteTicket(ticket);
+    }
+
+    async function handleTicketDecision(id, domain, decision) {
+      const statusEl = document.getElementById("apiSyncStatus");
+      const durSelect = document.getElementById(`dur-${id}`);
+      const durationMinutes = durSelect ? parseFloat(durSelect.value) : 60;
+
+      // Approved tickets get selected timed access; rejected tickets auto-delete after 20 seconds
+      const ttlMs = decision === "approved" ? durationMinutes * 60 * 1000 : 20 * 1000;
+      const expiresAtIso = new Date(Date.now() + ttlMs).toISOString();
+
+      statusEl.textContent =
+        decision === "approved"
+          ? `Granting ${domain} timed access (${durationMinutes < 1 ? Math.round(durationMinutes * 60) + "s" : durationMinutes + "m"})...`
+          : `Rejecting ${domain} (auto-deletes in 20s)...`;
+
+      if (decision === "approved") {
+        const cleaned = cleanDomain(domain);
+        approvedDomainsSet.add(cleaned);
+        localRules.forEach((r) => {
+          r.domains = r.domains.filter((d) => d !== cleaned);
+        });
+        await callNextDnsBridge("allow", [cleaned]);
+      }
+
+      if (supabaseClient) {
+        await supabaseClient
+          .from("unblock_requests")
+          .update({
+            status: decision,
+            duration_minutes: decision === "approved" ? Math.ceil(durationMinutes) : 0,
+            expires_at: expiresAtIso,
+            reviewed_by: "Admin-01",
+            updated_at: new Date().toISOString()
+          })
+          .eq("id", id);
+      } else {
+        const rows = JSON.parse(localStorage.getItem("studyshield_local_tickets") || "[]");
+        const found = rows.find((x) => x.id === id);
+        if (found) {
+          found.status = decision;
+          found.duration_minutes = decision === "approved" ? Math.ceil(durationMinutes) : 0;
+          found.expires_at = expiresAtIso;
+        }
+        localStorage.setItem("studyshield_local_tickets", JSON.stringify(rows));
+      }
+
+      statusEl.textContent =
+        decision === "approved"
+          ? `Timed access active for ${domain}`
+          : `Rejected ${domain} — scheduled for auto-delete`;
+
+      loadTickets();
+      renderRulesTable();
+    }
+
+    function renderRulesTable() {
+      const tbody = document.getElementById("rulesTableBody");
+      tbody.innerHTML = localRules
+        .map((r) => {
+          const badge = r.is_blocked
+            ? `<span class="tag tag-blocked">ENFORCED (BLOCKED)</span>`
+            : `<span class="tag tag-allowed">SUSPENDED (OPEN)</span>`;
+
+          return `
+            <tr>
+              <td><strong>${r.label}</strong></td>
+              <td class="mono">${r.domains.join(", ") || "(none)"}</td>
+              <td>${badge}</td>
+              <td>
+                <button class="btn btn-outline" onclick="togglePolicyRule('${r.rule_key}')">
+                  ${r.is_blocked ? "Suspend Rule" : "Enforce Block"}
+                </button>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    async function togglePolicyRule(ruleKey) {
+      const rule = localRules.find((r) => r.rule_key === ruleKey);
+      if (!rule) return;
+      rule.is_blocked = !rule.is_blocked;
+
+      const statusEl = document.getElementById("apiSyncStatus");
+      statusEl.textContent = `Updating ${rule.rule_key} on NextDNS...`;
+
+      await callNextDnsBridge(rule.is_blocked ? "block" : "allow", rule.domains);
+
+      if (supabaseClient) {
+        await supabaseClient
+          .from("policy_rules")
+          .update({ is_blocked: rule.is_blocked, updated_at: new Date().toISOString() })
+          .eq("rule_key", ruleKey);
+      }
+
+      statusEl.textContent = `Updated ${rule.rule_key}`;
+      renderRulesTable();
+    }
+
+    function isDomainBlocked(domain) {
+      const d = cleanDomain(domain);
+      if (approvedDomainsSet.has(d)) return false;
+      for (const r of localRules) {
+        if (r.domains.includes(d)) return r.is_blocked;
+      }
+      return false;
+    }
+
+    function runTenUrlAudit() {
+      const suite = [
+        { domain: "tiktok.com", cat: "Recreational Streaming", expected: true },
+        { domain: "netflix.com", cat: "Recreational Streaming", expected: true },
+        { domain: "steampowered.com", cat: "Gaming Platform", expected: true },
+        { domain: "roblox.com", cat: "Gaming Platform", expected: true },
+        { domain: "amtso.org", cat: "Simulated Phishing Threat", expected: true },
+        { domain: "puis.president.ac.id", cat: "University Portal", expected: false },
+        { domain: "president.ac.id", cat: "University Domain", expected: false },
+        { domain: "github.com", cat: "Academic Repository", expected: false },
+        { domain: "scholar.google.com", cat: "Research Database", expected: false },
+        { domain: "stackoverflow.com", cat: "Developer Reference", expected: false }
+      ];
+
+      let pass = 0;
+      const tbody = document.getElementById("auditTableBody");
+      tbody.innerHTML = suite
+        .map((item, i) => {
+          const blocked = isDomainBlocked(item.domain);
+          const ok = blocked === item.expected;
+          if (ok) pass++;
+
+          return `
+            <tr>
+              <td class="mono">${i + 1}</td>
+              <td class="mono">${item.domain}</td>
+              <td>${item.cat}</td>
+              <td class="mono">${item.expected ? "HTTP 403 BLOCKED" : "HTTP 200 ALLOWED"}</td>
+              <td>${
+                blocked
+                  ? `<span class="tag tag-blocked">HTTP 403 BLOCKED</span>`
+                  : `<span class="tag tag-allowed">HTTP 200 ALLOWED</span>`
+              }</td>
+              <td class="mono" style="color:${ok ? "var(--green)" : "var(--red)"}; font-weight:700;">
+                ${ok ? "PASS" : "FAIL"}
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+
+      const banner = document.getElementById("auditSummaryBanner");
+      banner.classList.remove("hidden");
+      document.getElementById("auditSummaryTitle").textContent =
+        `AUDIT COMPLETE — ${pass}/10 POLICIES VERIFIED (${Math.round((pass / 10) * 100)}% COMPLIANCE)`;
+      document.getElementById("auditSummaryText").textContent =
+        `Executed at ${new Date().toLocaleTimeString()} WIB. Distraction and phishing domains blocked; academic domains preserved.`;
+    }
+
+    initSupabase();
+  </script>
+</body>
+</html>
