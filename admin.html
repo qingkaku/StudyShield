@@ -29,11 +29,7 @@
       --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--sans);
@@ -43,43 +39,11 @@
       line-height: 1.5;
     }
 
-    .topbar {
-      background-color: var(--navy);
-      color: #ffffff;
-      border-bottom: 3px solid var(--navy-dark);
-      padding: 13px 20px;
-    }
-
-    .topbar-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-title {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .brand-sub {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: #cbd5e1;
-      margin-top: 2px;
-    }
-
-    .status-strip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .topbar { background-color: var(--navy); color: #ffffff; border-bottom: 3px solid var(--navy-dark); padding: 13px 20px; }
+    .topbar-inner { max-width: 1120px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+    .brand-title { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+    .brand-sub { font-family: var(--mono); font-size: 11px; color: #cbd5e1; margin-top: 2px; }
+    .status-strip { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .sys-badge {
       font-family: var(--mono);
@@ -90,48 +54,15 @@
       border: 1px solid rgba(255, 255, 255, 0.25);
       color: #f8fafc;
     }
+    .sys-badge.ok { background: #14532d; border-color: #22c55e; color: #dcfce7; }
+    .sys-badge.warn { background: #78350f; border-color: #f59e0b; color: #fef3c7; }
 
-    .sys-badge.ok {
-      background: #14532d;
-      border-color: #22c55e;
-      color: #dcfce7;
-    }
+    .subbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 8px 20px; }
+    .subbar-inner { max-width: 1120px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
 
-    .sys-badge.warn {
-      background: #78350f;
-      border-color: #f59e0b;
-      color: #fef3c7;
-    }
+    .container { max-width: 1120px; margin: 20px auto; padding: 0 20px 40px; }
 
-    .subbar {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 8px 20px;
-    }
-
-    .subbar-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .container {
-      max-width: 1120px;
-      margin: 20px auto;
-      padding: 0 20px 40px;
-    }
-
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      margin-bottom: 20px;
-    }
-
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 3px; margin-bottom: 20px; }
     .panel-header {
       padding: 12px 16px;
       border-bottom: 1px solid var(--border);
@@ -142,25 +73,10 @@
       flex-wrap: wrap;
       gap: 8px;
     }
+    .panel-title { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+    .panel-body { padding: 16px; }
 
-    .panel-title {
-      font-size: 12.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--navy);
-    }
-
-    .panel-body {
-      padding: 16px;
-    }
-
-    table.data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12.5px;
-    }
-
+    table.data-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
     table.data-table th {
       text-align: left;
       padding: 9px 10px;
@@ -172,20 +88,11 @@
       font-size: 11px;
       letter-spacing: 0.03em;
     }
+    table.data-table td { padding: 9px 10px; border: 1px solid var(--border); vertical-align: middle; }
 
-    table.data-table td {
-      padding: 9px 10px;
-      border: 1px solid var(--border);
-      vertical-align: middle;
-    }
+    .mono { font-family: var(--mono); font-size: 12px; }
 
-    .mono {
-      font-family: var(--mono);
-      font-size: 12px;
-    }
-
-    input[type="text"],
-    input[type="password"] {
+    input[type="text"], input[type="password"] {
       width: 100%;
       padding: 8px 10px;
       border: 1px solid var(--border-strong);
@@ -217,94 +124,22 @@
       font-family: var(--sans);
       text-decoration: none;
     }
+    .btn-primary { background: var(--navy); color: #ffffff; border-color: var(--navy-dark); }
+    .btn-primary:hover { background: var(--navy-dark); }
+    .btn-approve { background: var(--green); color: #ffffff; padding: 5px 10px; }
+    .btn-approve:hover { background: #166534; }
+    .btn-reject { background: #ffffff; color: var(--red); border-color: var(--red); padding: 5px 10px; }
+    .btn-reject:hover { background: var(--red-bg); }
+    .btn-outline { background: #ffffff; color: var(--text); border-color: var(--border-strong); padding: 5px 10px; }
+    .btn-outline:hover { background: #f9fafb; }
 
-    .btn-primary {
-      background: var(--navy);
-      color: #ffffff;
-      border-color: var(--navy-dark);
-    }
+    .tag { display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 2px; text-transform: uppercase; }
+    .tag-blocked { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+    .tag-allowed { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+    .tag-pending { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
 
-    .btn-primary:hover {
-      background: var(--navy-dark);
-    }
-
-    .btn-approve {
-      background: var(--green);
-      color: #ffffff;
-      padding: 5px 10px;
-    }
-
-    .btn-approve:hover {
-      background: #166534;
-    }
-
-    .btn-reject {
-      background: #ffffff;
-      color: var(--red);
-      border-color: var(--red);
-      padding: 5px 10px;
-    }
-
-    .btn-reject:hover {
-      background: var(--red-bg);
-    }
-
-    .btn-outline {
-      background: #ffffff;
-      color: var(--text);
-      border-color: var(--border-strong);
-      padding: 5px 10px;
-    }
-
-    .btn-outline:hover {
-      background: #f9fafb;
-    }
-
-    .tag {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 6px;
-      border-radius: 2px;
-      text-transform: uppercase;
-    }
-
-    .tag-blocked {
-      background: var(--red-bg);
-      color: var(--red);
-      border: 1px solid var(--red-border);
-    }
-
-    .tag-allowed {
-      background: var(--green-bg);
-      color: var(--green);
-      border: 1px solid var(--green-border);
-    }
-
-    .tag-pending {
-      background: var(--amber-bg);
-      color: var(--amber);
-      border: 1px solid var(--amber-border);
-    }
-
-    .timer-pill {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 11.5px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 2px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid #bfdbfe;
-    }
-
-    .timer-pill.expiring {
-      background: var(--red-bg);
-      color: var(--red);
-      border-color: var(--red-border);
-    }
+    .timer-pill { display: inline-block; font-family: var(--mono); font-size: 11.5px; font-weight: 700; padding: 2px 7px; border-radius: 2px; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .timer-pill.expiring { background: var(--red-bg); color: var(--red); border-color: var(--red-border); }
 
     .notice-bar {
       border-left: 4px solid var(--green);
@@ -318,43 +153,12 @@
       font-size: 12.5px;
     }
 
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(17, 24, 39, 0.55);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      z-index: 50;
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal-box {
-      background: #ffffff;
-      border: 1px solid var(--border-strong);
-      border-radius: 3px;
-      width: 100%;
-      max-width: 500px;
-    }
-
-    .field {
-      margin-bottom: 12px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .hidden {
-      display: none !important;
-    }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(17, 24, 39, 0.55); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+    .modal-backdrop.open { display: flex; }
+    .modal-box { background: #ffffff; border: 1px solid var(--border-strong); border-radius: 3px; width: 100%; max-width: 500px; }
+    .field { margin-bottom: 12px; }
+    .field label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+    .hidden { display: none !important; }
 
     .footer {
       max-width: 1120px;
@@ -397,7 +201,6 @@
 
   <main class="container">
 
-    <!-- PIN Gate -->
     <div id="adminPinGate" class="panel" style="max-width: 440px; margin: 28px auto;">
       <div class="panel-header">
         <span class="panel-title">Network Operations Login</span>
@@ -414,16 +217,18 @@
       </div>
     </div>
 
-    <!-- Admin Workspace -->
     <div id="adminWorkspace" class="hidden">
 
-      <!-- 1. Incoming Student Unblock Tickets -->
       <div class="panel">
         <div class="panel-header">
-          <span class="panel-title">Student Academic Exception Queue (Timed Auto-Revoke & Auto-Delete)</span>
-          <div style="display: flex; gap: 8px; align-items: center;">
+          <span class="panel-title">
+            Student Academic Exception Queue
+            <span id="pendingCountBadge" class="tag tag-pending">0 PENDING</span>
+          </span>
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
             <span id="apiSyncStatus" class="mono" style="font-size: 11px; color: var(--muted);">Polling every 4s</span>
             <button class="btn btn-outline" onclick="loadTickets()">Refresh</button>
+            <button class="btn btn-reject" onclick="purgeAllTickets()" title="Reset demo queue and re-enforce all blocks">Reset Queue</button>
           </div>
         </div>
         <div class="panel-body" style="overflow-x: auto;">
@@ -448,7 +253,6 @@
         </div>
       </div>
 
-      <!-- 2. Category Enforcement Controls -->
       <div class="panel">
         <div class="panel-header">
           <span class="panel-title">Active DNS Category Rules</span>
@@ -468,7 +272,6 @@
         </div>
       </div>
 
-      <!-- 3. 10-URL Verification Suite -->
       <div class="panel">
         <div class="panel-header">
           <span class="panel-title">10-URL Compliance Verification Audit</span>
@@ -511,7 +314,6 @@
     <span>BACKEND: SUPABASE + NETLIFY FUNCTIONS + NEXTDNS API</span>
   </footer>
 
-  <!-- Supabase Config Modal -->
   <div id="configModal" class="modal-backdrop">
     <div class="modal-box">
       <div class="panel-header">
@@ -547,12 +349,13 @@
     let countdownTimer = null;
     let currentTickets = [];
     const processingIds = new Set();
+    const selectedDurations = {};
 
-    // Track original rule mapping so expired timed domains automatically re-block
     const DOMAIN_RULE_MAP = {
       "tiktok.com": "streaming",
       "netflix.com": "streaming",
       "youtube.com": "streaming",
+      "instagram.com": "streaming",
       "steampowered.com": "gaming",
       "roblox.com": "gaming",
       "discord.com": "gaming",
@@ -560,33 +363,21 @@
     };
 
     let localRules = [
-      {
-        rule_key: "streaming",
-        label: "Recreational Video Streaming (Rule #104)",
-        domains: ["tiktok.com", "netflix.com", "youtube.com"],
-        is_blocked: true
-      },
-      {
-        rule_key: "gaming",
-        label: "Gaming & Digital Distribution (Rule #108)",
-        domains: ["steampowered.com", "roblox.com", "discord.com"],
-        is_blocked: true
-      },
-      {
-        rule_key: "phishing",
-        label: "Phishing & Malware Threat Feed (Rule #001)",
-        domains: ["amtso.org"],
-        is_blocked: true
-      }
+      { rule_key: "streaming", label: "Recreational Video Streaming (Rule #104)", domains: ["tiktok.com", "netflix.com", "youtube.com"], is_blocked: true },
+      { rule_key: "gaming", label: "Gaming & Digital Distribution (Rule #108)", domains: ["steampowered.com", "roblox.com", "discord.com"], is_blocked: true },
+      { rule_key: "phishing", label: "Phishing & Malware Threat Feed (Rule #001)", domains: ["amtso.org"], is_blocked: true }
     ];
 
-    let approvedDomainsSet = new Set([
-      "puis.president.ac.id",
-      "president.ac.id",
-      "github.com",
-      "scholar.google.com",
-      "stackoverflow.com"
-    ]);
+    let approvedDomainsSet = new Set(["puis.president.ac.id", "president.ac.id", "github.com", "scholar.google.com", "stackoverflow.com"]);
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
 
     function initSupabase() {
       const savedUrl = localStorage.getItem("studyshield_sb_url") || CFG.SUPABASE_URL || "";
@@ -615,13 +406,8 @@
       }
     }
 
-    function openConfigModal() {
-      document.getElementById("configModal").classList.add("open");
-    }
-
-    function closeConfigModal() {
-      document.getElementById("configModal").classList.remove("open");
-    }
+    function openConfigModal() { document.getElementById("configModal").classList.add("open"); }
+    function closeConfigModal() { document.getElementById("configModal").classList.remove("open"); }
 
     function saveSupabaseConfig() {
       localStorage.setItem("studyshield_sb_url", document.getElementById("cfgSupabaseUrl").value.trim());
@@ -663,17 +449,8 @@
         loadTickets();
         renderRulesTable();
 
-        if (!pollTimer) {
-          pollTimer = setInterval(() => {
-            if (adminUnlocked) loadTickets();
-          }, 4000);
-        }
-
-        if (!countdownTimer) {
-          countdownTimer = setInterval(() => {
-            if (adminUnlocked) tickTimedPermissions();
-          }, 1000);
-        }
+        if (!pollTimer) pollTimer = setInterval(() => { if (adminUnlocked) loadTickets(); }, 4000);
+        if (!countdownTimer) countdownTimer = setInterval(() => { if (adminUnlocked) tickTimedPermissions(); }, 1000);
       } else {
         document.getElementById("pinError").textContent = "Invalid Administrator PIN.";
       }
@@ -701,7 +478,6 @@
       }
     }
 
-    // Automatically revoke timed access and delete expired table rows
     async function expireAndDeleteTicket(ticket) {
       if (processingIds.has(ticket.id)) return;
       processingIds.add(ticket.id);
@@ -710,15 +486,12 @@
       const statusEl = document.getElementById("apiSyncStatus");
 
       if (ticket.status === "approved") {
-        statusEl.textContent = `Time expired for ${cleaned} — revoking access & deleting row...`;
+        statusEl.textContent = `Time expired for ${cleaned} — revoking & deleting...`;
         approvedDomainsSet.delete(cleaned);
 
-        // Restore domain back into its category rule
         const targetRuleKey = DOMAIN_RULE_MAP[cleaned] || "streaming";
         const ruleObj = localRules.find((r) => r.rule_key === targetRuleKey);
-        if (ruleObj && !ruleObj.domains.includes(cleaned)) {
-          ruleObj.domains.push(cleaned);
-        }
+        if (ruleObj && !ruleObj.domains.includes(cleaned)) ruleObj.domains.push(cleaned);
 
         await callNextDnsBridge("block", [cleaned]);
         renderRulesTable();
@@ -734,10 +507,35 @@
         localStorage.setItem("studyshield_local_tickets", JSON.stringify(remaining));
       }
 
+      delete selectedDurations[ticket.id];
       currentTickets = currentTickets.filter((x) => x.id !== ticket.id);
       processingIds.delete(ticket.id);
       renderTicketsTable();
       statusEl.textContent = `Expired entry ${ticket.ticket_code} revoked & removed`;
+    }
+
+    async function purgeAllTickets() {
+      if (!confirm("Clear all tickets in the queue and re-block any active exceptions?")) return;
+      const statusEl = document.getElementById("apiSyncStatus");
+      statusEl.textContent = "Resetting demo queue & re-enforcing NextDNS blocks...";
+
+      const approvedDomains = currentTickets
+        .filter((t) => t.status === "approved")
+        .map((t) => cleanDomain(t.domain));
+
+      if (approvedDomains.length) {
+        approvedDomains.forEach((d) => approvedDomainsSet.delete(d));
+        await callNextDnsBridge("block", [...new Set(approvedDomains)]);
+      }
+
+      if (supabaseClient) {
+        await supabaseClient.from("unblock_requests").delete().neq("ticket_code", "");
+      }
+      localStorage.removeItem("studyshield_local_tickets");
+      currentTickets = [];
+      renderTicketsTable();
+      renderRulesTable();
+      statusEl.textContent = "Demo queue cleared & all rules enforced";
     }
 
     function tickTimedPermissions() {
@@ -747,17 +545,12 @@
       for (const t of currentTickets) {
         if (t.expires_at) {
           const expMs = new Date(t.expires_at).getTime();
-          if (now >= expMs) {
-            expireAndDeleteTicket(t);
-          } else {
-            needsRender = true;
-          }
+          if (now >= expMs) expireAndDeleteTicket(t);
+          else needsRender = true;
         }
       }
 
-      if (needsRender) {
-        updateCountdownBadgesOnly();
-      }
+      if (needsRender) updateCountdownBadgesOnly();
     }
 
     function updateCountdownBadgesOnly() {
@@ -768,9 +561,7 @@
         if (!badge) continue;
         const rem = new Date(t.expires_at).getTime() - now;
         badge.textContent = formatRemainingTime(rem);
-        if (rem <= 15000) {
-          badge.classList.add("expiring");
-        }
+        if (rem <= 15000) badge.classList.add("expiring");
       }
     }
 
@@ -782,9 +573,7 @@
           .from("unblock_requests")
           .select("*")
           .order("created_at", { ascending: false });
-        if (!error && data) {
-          rows = data;
-        }
+        if (!error && data) rows = data;
       }
 
       const now = Date.now();
@@ -792,13 +581,10 @@
 
       for (const r of rows) {
         if (r.expires_at && new Date(r.expires_at).getTime() <= now) {
-          // Already expired — trigger revocation & DB deletion immediately
           expireAndDeleteTicket(r);
         } else {
           activeRows.push(r);
-          if (r.status === "approved") {
-            approvedDomainsSet.add(cleanDomain(r.domain));
-          }
+          if (r.status === "approved") approvedDomainsSet.add(cleanDomain(r.domain));
         }
       }
 
@@ -806,7 +592,12 @@
       renderTicketsTable();
     }
 
+    function recordDurationChoice(id, val) { selectedDurations[id] = val; }
+
     function renderTicketsTable() {
+      const pendingCount = currentTickets.filter((t) => t.status === "pending").length;
+      document.getElementById("pendingCountBadge").textContent = `${pendingCount} PENDING`;
+
       const tbody = document.getElementById("ticketsTableBody");
       if (!currentTickets.length) {
         tbody.innerHTML = `<tr><td colspan="7" class="mono" style="text-align:center; color:var(--muted);">No active or pending student exception tickets.</td></tr>`;
@@ -817,6 +608,12 @@
 
       tbody.innerHTML = currentTickets
         .map((t) => {
+          const safeId = escapeHtml(t.id);
+          const safeCode = escapeHtml(t.ticket_code);
+          const safeNim = escapeHtml(t.student_id);
+          const safeDomain = escapeHtml(t.domain);
+          const safeReason = escapeHtml(t.reason);
+
           let statusBadge = `<span class="tag tag-pending">PENDING</span>`;
           if (t.status === "approved") statusBadge = `<span class="tag tag-allowed">ACTIVE ACCESS</span>`;
           if (t.status === "rejected") statusBadge = `<span class="tag tag-blocked">REJECTED</span>`;
@@ -825,29 +622,33 @@
           if (t.expires_at) {
             const rem = new Date(t.expires_at).getTime() - now;
             const isExpiring = rem <= 15000 ? "expiring" : "";
-            timerCell = `<span id="timer-${t.id}" class="timer-pill ${isExpiring}">${formatRemainingTime(rem)}</span>`;
+            timerCell = `<span id="timer-${safeId}" class="timer-pill ${isExpiring}">${formatRemainingTime(rem)}</span>`;
           }
+
+          const chosenDur = selectedDurations[t.id] || "0.25";
+          const opts = [
+            { val: "0.25", label: "15 Secs (Demo)" },
+            { val: "15", label: "15 Mins" },
+            { val: "30", label: "30 Mins" },
+            { val: "60", label: "1 Hour" },
+            { val: "120", label: "2 Hours" }
+          ]
+            .map((o) => `<option value="${o.val}" ${chosenDur === o.val ? "selected" : ""}>${o.label}</option>`)
+            .join("");
 
           const actions =
             t.status === "pending"
-              ? `<select id="dur-${t.id}" class="duration-select" title="Select timed access duration">
-                   <option value="0.25">15 Secs (Demo)</option>
-                   <option value="15">15 Mins</option>
-                   <option value="30">30 Mins</option>
-                   <option value="60" selected>1 Hour</option>
-                   <option value="120">2 Hours</option>
-                   <option value="240">4 Hours</option>
-                 </select>
-                 <button class="btn btn-approve" onclick="handleTicketDecision('${t.id}', '${t.domain}', 'approved')">Grant Timed Access</button>
-                 <button class="btn btn-reject" onclick="handleTicketDecision('${t.id}', '${t.domain}', 'rejected')">Reject</button>`
-              : `<button class="btn btn-reject" onclick="expireAndDeleteTicketById('${t.id}')">Revoke & Delete Now</button>`;
+              ? `<select id="dur-${safeId}" class="duration-select" onchange="recordDurationChoice('${safeId}', this.value)">${opts}</select>
+                 <button class="btn btn-approve" onclick="handleTicketDecisionById('${safeId}', 'approved')">Grant Timed Access</button>
+                 <button class="btn btn-reject" onclick="handleTicketDecisionById('${safeId}', 'rejected')">Reject</button>`
+              : `<button class="btn btn-reject" onclick="expireAndDeleteTicketById('${safeId}')">Revoke & Delete Now</button>`;
 
           return `
-            <tr id="row-${t.id}">
-              <td class="mono">${t.ticket_code}</td>
-              <td class="mono">${t.student_id}</td>
-              <td class="mono">${t.domain}</td>
-              <td>${t.reason}</td>
+            <tr id="row-${safeId}">
+              <td class="mono">${safeCode}</td>
+              <td class="mono">${safeNim}</td>
+              <td class="mono">${safeDomain}</td>
+              <td>${safeReason}</td>
               <td>${statusBadge}</td>
               <td>${timerCell}</td>
               <td style="white-space:nowrap;">${actions}</td>
@@ -858,30 +659,32 @@
     }
 
     function expireAndDeleteTicketById(id) {
-      const ticket = currentTickets.find((x) => x.id === id);
+      const ticket = currentTickets.find((x) => String(x.id) === String(id));
       if (ticket) expireAndDeleteTicket(ticket);
+    }
+
+    function handleTicketDecisionById(id, decision) {
+      const ticket = currentTickets.find((x) => String(x.id) === String(id));
+      if (ticket) handleTicketDecision(ticket.id, ticket.domain, decision);
     }
 
     async function handleTicketDecision(id, domain, decision) {
       const statusEl = document.getElementById("apiSyncStatus");
       const durSelect = document.getElementById(`dur-${id}`);
-      const durationMinutes = durSelect ? parseFloat(durSelect.value) : 60;
+      const durationMinutes = durSelect ? parseFloat(durSelect.value) : 0.25;
 
-      // Approved tickets get selected timed access; rejected tickets auto-delete after 20 seconds
-      const ttlMs = decision === "approved" ? durationMinutes * 60 * 1000 : 20 * 1000;
+      const ttlMs = decision === "approved" ? durationMinutes * 60 * 1000 : 15 * 1000;
       const expiresAtIso = new Date(Date.now() + ttlMs).toISOString();
 
       statusEl.textContent =
         decision === "approved"
           ? `Granting ${domain} timed access (${durationMinutes < 1 ? Math.round(durationMinutes * 60) + "s" : durationMinutes + "m"})...`
-          : `Rejecting ${domain} (auto-deletes in 20s)...`;
+          : `Rejecting ${domain} (auto-deletes in 15s)...`;
 
       if (decision === "approved") {
         const cleaned = cleanDomain(domain);
         approvedDomainsSet.add(cleaned);
-        localRules.forEach((r) => {
-          r.domains = r.domains.filter((d) => d !== cleaned);
-        });
+        localRules.forEach((r) => { r.domains = r.domains.filter((d) => d !== cleaned); });
         await callNextDnsBridge("allow", [cleaned]);
       }
 
@@ -926,11 +729,11 @@
 
           return `
             <tr>
-              <td><strong>${r.label}</strong></td>
-              <td class="mono">${r.domains.join(", ") || "(none)"}</td>
+              <td><strong>${escapeHtml(r.label)}</strong></td>
+              <td class="mono">${escapeHtml(r.domains.join(", ") || "(none)")}</td>
               <td>${badge}</td>
               <td>
-                <button class="btn btn-outline" onclick="togglePolicyRule('${r.rule_key}')">
+                <button class="btn btn-outline" onclick="togglePolicyRule('${escapeHtml(r.rule_key)}')">
                   ${r.is_blocked ? "Suspend Rule" : "Enforce Block"}
                 </button>
               </td>
